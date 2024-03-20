@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import pb from "./pbClient.js";
+import pb from "../api/pbClient.js";
 
-export default function Products() {
+export default function ProductList() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,6 @@ export default function Products() {
 
   return (
     <div>
-      <h2>Products</h2>
       <ul>
         {products.map((product) => (
           <li key={product.id}> {product.product_name}</li>
