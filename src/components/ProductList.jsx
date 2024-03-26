@@ -1,28 +1,17 @@
-import { useEffect, useState } from "react";
-import pb from "../api/pbClient.js";
+// import { useEffect, useState } from "react";
+// import pb from "../api/pbClient.js";
+
+import { useSelector } from "react-redux";
+import ProductItem from "./ProductItem";
 
 export default function ProductList() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        pb.autoCancellation(false);
-        const list = await pb.collection("products").getList();
-        setProducts(list.items);
-      } catch (error) {
-        console.error("Failed to retrieve products", error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
+  const products = useSelector((state) => state.products.items);
 
   return (
     <div>
       <ul>
         {products.map((product) => (
-          <li key={product.id}> {product.product_name}</li>
+          <ProductItem key={product.id} product={product} />
         ))}
       </ul>
     </div>
