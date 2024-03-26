@@ -4,6 +4,7 @@ import ProductList from "../components/ProductList";
 
 import { fetchProducts } from "../features/products/productsSlice";
 import { useSelector, useDispatch } from "react-redux";
+import Navbar from "../components/Navbar";
 
 export default function ProductsPage() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function ProductsPage() {
 
   return (
     <div>
+      <Navbar />
       <h1>Products</h1>
       <ProductList />
     </div>

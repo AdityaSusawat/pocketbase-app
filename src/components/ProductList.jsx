@@ -9,11 +9,11 @@ export default function ProductList() {
 
   return (
     <div>
-      <ul>
+      <div className="px-2 grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mt-6">
         {products.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
