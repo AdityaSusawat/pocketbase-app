@@ -3,17 +3,34 @@
 
 import { useSelector } from "react-redux";
 import ProductItem from "./ProductItem";
+import { Link } from "react-router-dom";
 
-export default function ProductList() {
+export default function ProductList({ searchText }) {
+  //Fetching all the products from redux store
   const products = useSelector((state) => state.products.items);
 
+  //!Improve search filtering
+  const filteredProducts = products.filter((product) => {
+    return product.productName.toLowerCase().includes(searchText.toLowerCase());
+  });
+
   return (
-    <div>
-      <div className="px-2 grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mt-6">
-        {products.map((product) => (
-          <ProductItem key={product.id} product={product} />
-        ))}
-      </div>
+    <div className="border-[1px] w-full">
+      {filteredProducts.length === 0 ? (
+        <div className="px-[3%] flex justify-center text-6xl mt-28">
+          {"Couldn't find anything :("}
+        </div>
+      ) : (
+        <ul className="px-[3%] grid gap-4 xl:gap-16 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-6">
+          {filteredProducts.map((product) => (
+            <li key={product.id}>
+              <Link to={`/products/${product.id}`}>
+                <ProductItem product={product} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
