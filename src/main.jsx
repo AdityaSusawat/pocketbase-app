@@ -6,9 +6,11 @@ import App from "./App.jsx";
 import ProductsPage from "./pages/ProductsPage.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 
+//Component to test new components
+import TestComponent from "./components/TestComponent.jsx";
+
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
-import Tmp from "./Tmp.jsx";
 import "./styles/main.css";
 
 const router = createBrowserRouter([
@@ -25,8 +27,8 @@ const router = createBrowserRouter([
     element: <ProductPage />,
   },
   {
-    path: "/tmp",
-    element: <Tmp />,
+    path: "/test",
+    element: <TestComponent />,
   },
 ]);
 

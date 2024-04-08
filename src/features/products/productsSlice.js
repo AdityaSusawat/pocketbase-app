@@ -24,7 +24,7 @@ export const fetchProductById = createAsyncThunk(
 export const productsSlice = createSlice({
   name: "products",
   initialState: {
-    items: [],
+    products: [],
     currentProduct: null,
 
     listStatus: "idle", //'idle', 'loading', 'succeeded', 'failed'
@@ -45,7 +45,7 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.listStatus = "succeeded";
-        state.items = action.payload;
+        state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.listStatus = "failed";

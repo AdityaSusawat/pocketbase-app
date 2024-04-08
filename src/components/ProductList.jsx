@@ -4,10 +4,11 @@
 import { useSelector } from "react-redux";
 import ProductItem from "./ProductItem";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-export default function ProductList({ searchText }) {
+export default function ProductList({ searchText, products }) {
   //Fetching all the products from redux store
-  const products = useSelector((state) => state.products.items);
+  //const products = useSelector((state) => state.products.products);
 
   //!Improve search filtering
   const filteredProducts = products.filter((product) => {
@@ -15,7 +16,7 @@ export default function ProductList({ searchText }) {
   });
 
   return (
-    <div className="border-[1px] w-full">
+    <div className="w-full">
       {filteredProducts.length === 0 ? (
         <div className="px-[3%] flex justify-center text-6xl mt-28">
           {"Couldn't find anything :("}

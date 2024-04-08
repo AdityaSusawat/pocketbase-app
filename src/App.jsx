@@ -1,20 +1,22 @@
-import ImageSlider from "./components/ImageSlider";
-import img1 from "./imgs/sp1.png";
-import img2 from "./imgs/sp2.png";
-import img3 from "./imgs/sp3.png";
-import img4 from "./imgs/sp4.png";
 import "./styles/main.css";
 
-import { BackgroundGradient } from "./components/BackgroundGradient";
-
-const IMAGES = [img1, img2, img3, img4];
+import ImageTrack from "./components/ImageTrack";
+import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
     <>
-      <BackgroundGradient className="max-w-[1200px] w-[100%] mx-auto my-0">
-        <ImageSlider imageURLs={IMAGES} />
-      </BackgroundGradient>
+      <Navbar />
+      <div className="relative" aria-label="ImageTrack">
+        <div className="text-9xl flex absolute max-w-[50%] h-full p-12 font-semibold text-center text">
+          CLOTHES YOU LOVE
+        </div>
+
+        <ImageTrack className="z-10" />
+        <div className="text-9xl flex absolute right-0 -z-10 max-w-[50%] top-0 h-full p-12 font-semibold text-center text">
+          CLOTHES LOVE YOU
+        </div>
+      </div>
     </>
   );
 }

@@ -11,12 +11,27 @@ import { useDebounce } from "../hooks/useDebounce";
 
 export default function ProductsPage() {
   const dispatch = useDispatch();
-  const { listStatus, error } = useSelector((state) => state.products);
+  const { products, listStatus, error } = useSelector(
+    (state) => state.products
+  );
 
   //Search bar
   const [searchText, setSearchText] = useState("");
   const debouncedSearchText = useDebounce(searchText, 500);
   const searchInputRef = useRef(null);
+
+  //Sorting
+  const [sortOrder, setSortOrder] = useState("desc");
+
+  let sortedProducts = [...products];
+
+  sortedProducts.sort((a, b) => {
+    if (sortOrder === "asc") {
+      return a.price - b.price;
+    } else {
+      return b.price - a.price;
+    }
+  });
 
   //! Check
   //* using dispatch in dependency array is like leaving it empty, but this follows the best practices
@@ -40,10 +55,10 @@ export default function ProductsPage() {
   return (
     <div>
       <Navbar />
-      <h1 className="my-6 text-4xl text-center">Products</h1>
+      <h1 className="my-6 text-6xl text-center">Products</h1>
 
       <div className="flex">
-        <div className=" py-2 px-[3%] text-center border-[1px] border-r-0">
+        <div className=" py-2 px-[2%] text-center border-[1px] ml-4 h-full pb-[300px]">
           <h1 className="text-2xl">Options</h1>
           <input
             type="text"
@@ -54,12 +69,22 @@ export default function ProductsPage() {
             ref={searchInputRef}
           />
           <div className="grid grid-cols-1 mt-10 gap-3 px-3">
-            <button className="filter-btn">PRESS</button>
+            <button
+              className="filter-btn"
+              onClick={() =>
+                setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
+              }
+            >
+              {sortOrder === "asc" ? "Sort Price ↓" : "Sort Price ↑"}
+            </button>
             <button className="filter-btn">PRESS</button>
             <button className="filter-btn">PRESS</button>
           </div>
         </div>
-        <ProductList searchText={debouncedSearchText} />
+        <ProductList
+          products={sortedProducts}
+          searchText={debouncedSearchText}
+        />
       </div>
     </div>
   );

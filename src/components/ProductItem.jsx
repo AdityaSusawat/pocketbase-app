@@ -1,7 +1,7 @@
 import "../styles/components/product.css";
 
-import { useEffect, useState } from "react";
-import ImageSlider from "./ImageSlider";
+// import { useEffect, useState } from "react";
+// import ImageSlider from "./ImageSlider";
 import { BackgroundGradient } from "./BackgroundGradient";
 
 //? Add cart feature to each item
@@ -9,7 +9,7 @@ import { BackgroundGradient } from "./BackgroundGradient";
 export default function ProductItem({ product }) {
   const { id, available, colour, images, productName, size, price } = product;
 
-  let imageLinks = images.map((img) => {
+  let imageURLs = images.map((img) => {
     return `${import.meta.env.VITE_FILES_URL}/${product.collectionId}/${
       product.id
     }/${img}`;
@@ -19,7 +19,12 @@ export default function ProductItem({ product }) {
     <>
       <BackgroundGradient className="h-full w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden bg-black/5 p-[1px] cursor-pointer">
         <div className="flex items-end justify-end h-56 w-full bg-cover rounded-xl">
-          <ImageSlider imageURLs={imageLinks} />
+          {/* <ImageSlider imageURLs={imageURLs} /> */}
+          <img
+            className="object-cover w-[100%] h-[100%] block aspect-[10/6] "
+            src={imageURLs[0]}
+            alt="Product Image"
+          />
         </div>
         <div className="flex px-1 py-1 sm:px-4 sm:py-3 justify-between h-20 bg-slate-950">
           <div>
